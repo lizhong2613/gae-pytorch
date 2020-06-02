@@ -1,4 +1,4 @@
-import pickle as pkl
+import pickle as pkl #序列化使用的一个包
 
 import networkx as nx
 import numpy as np

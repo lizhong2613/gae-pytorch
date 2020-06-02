@@ -21,7 +21,7 @@ parser.add_argument('--hidden1', type=int, default=32, help='Number of units in 
 parser.add_argument('--hidden2', type=int, default=16, help='Number of units in hidden layer 2.')
 parser.add_argument('--lr', type=float, default=0.01, help='Initial learning rate.')
 parser.add_argument('--dropout', type=float, default=0., help='Dropout rate (1 - keep probability).')
-parser.add_argument('--dataset-str', type=str, default='cora', help='type of dataset.')
+parser.add_argument('--dataset-str', type=str, default='citeseer', help='type of dataset.')
 
 args = parser.parse_args()
 
@@ -45,7 +45,7 @@ def gae_for(args):
     # adj_label = sparse_to_tuple(adj_label)
     adj_label = torch.FloatTensor(adj_label.toarray())
 
-    pos_weight = float(adj.shape[0] * adj.shape[0] - adj.sum()) / adj.sum()
+    pos_weight = torch.Tensor([float(adj.shape[0] * adj.shape[0] - adj.sum()) / adj.sum()])
     norm = adj.shape[0] * adj.shape[0] / float((adj.shape[0] * adj.shape[0] - adj.sum()) * 2)
 
     model = GCNModelVAE(feat_dim, args.hidden1, args.hidden2, args.dropout)

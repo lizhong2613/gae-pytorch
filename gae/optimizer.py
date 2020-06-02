@@ -4,6 +4,7 @@ import torch.nn.functional as F
 
 
 def loss_function(preds, labels, mu, logvar, n_nodes, norm, pos_weight):
+
     cost = norm * F.binary_cross_entropy_with_logits(preds, labels, pos_weight=pos_weight)
 
     # see Appendix B from VAE paper:
